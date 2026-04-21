@@ -1,0 +1,26 @@
+# Binaries
+smartxctl
+*.exe
+
+# Go
+go.work
+vendor/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Config with secrets (optional - keep config.yaml in git for defaults)
+# config.yaml
+
+# Build output
+/dist/
+/bin/
+
+.codex
