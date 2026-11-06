@@ -1,7 +1,8 @@
 package cli
 
 import (
-	"encoding/json"
+	"encoding/json/jsontext"
+	jsonv2 "encoding/json/v2"
 	"fmt"
 	"io"
 	"strings"
@@ -78,7 +79,6 @@ func newTabWriter(out io.Writer) *tabwriter.Writer {
 }
 
 func renderJSON(out io.Writer, value any) error {
-	enc := json.NewEncoder(out)
-	enc.SetIndent("", "  ")
-	return enc.Encode(value)
+	enc := jsontext.NewEncoder(out, jsontext.WithIndent("  "))
+	return jsonv2.MarshalEncode(enc, value)
 }

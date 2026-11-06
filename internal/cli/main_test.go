@@ -167,3 +167,19 @@ func TestRenderVMDescriptionTable(t *testing.T) {
 		t.Fatalf("unexpected rendered description: %q", rendered)
 	}
 }
+
+func TestRenderJSONUsesIndentedOutput(t *testing.T) {
+	var out bytes.Buffer
+
+	if err := renderJSON(&out, struct {
+		Name  string   `json:"name"`
+		Items []string `json:"items"`
+	}{Name: "demo", Items: []string{"one", "two"}}); err != nil {
+		t.Fatalf("renderJSON() error = %v", err)
+	}
+
+	want := "{\n  \"name\": \"demo\",\n  \"items\": [\n    \"one\",\n    \"two\"\n  ]\n}\n"
+	if got := out.String(); got != want {
+		t.Errorf("renderJSON() = %q, want %q", got, want)
+	}
+}
